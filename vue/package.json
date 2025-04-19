@@ -11,6 +11,8 @@
     "quapp:build": "node build.js"
   },
   "dependencies": {
+    "archiver": "^7.0.1",
+    "fs-extra": "^11.3.0",
     "qrcode-terminal": "^0.12.0",
     "vue": "^3.5.13"
   },

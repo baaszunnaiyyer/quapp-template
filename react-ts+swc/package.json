@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "quapp:serve": "node server.js"
+    "quapp:serve": "node server.js",
+    "quapp:build": "node build.js"
   },
   "dependencies": {
     "qrcode-terminal": "^0.12.0",

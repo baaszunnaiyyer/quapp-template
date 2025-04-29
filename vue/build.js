@@ -1,9 +1,19 @@
 import { execSync } from "child_process";
-import fs from "fs-extra";
+import fs from "fs";
+import { rm } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import chalk from "chalk";
 import archiver from "archiver";
+
+// ASCII color codes
+const colors = {
+  blue: "\x1b[34m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  reset: "\x1b[0m",
+  bold: "\x1b[1m",
+};
 
 // Resolve __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -13,7 +23,7 @@ const projectRoot = process.cwd();
 const distFolder = path.join(projectRoot, "dist");
 const outputQuapp = path.join(projectRoot, "dist.quapp");
 
-console.log(chalk.blue("\n📦 Starting production build..."));
+console.log(`${colors.blue}\n📦 Starting production build...${colors.reset}`);
 
 try {
   // Step 1: Run the actual build command
@@ -21,7 +31,7 @@ try {
 
   // Step 2: Verify dist folder exists
   if (!fs.existsSync(distFolder)) {
-    console.log(chalk.red("❌ Build folder 'dist/' not found!"));
+    console.error(`${colors.red}❌ Build folder 'dist/' not found!${colors.reset}`);
     process.exit(1);
   }
 
@@ -30,13 +40,13 @@ try {
   const archive = archiver("zip", { zlib: { level: 9 } });
 
   output.on("close", async () => {
-    console.log(chalk.green(`\n✅ Project built and compressed → ${chalk.bold("dist.quapp")}`));
+    console.log(`${colors.green}\n✅ Project built and compressed → ${colors.bold}dist.quapp${colors.reset}`);
 
     // Step 4: Delete the dist folder after successful zip
     try {
-      await fs.remove(distFolder);
+      await rm(distFolder, { recursive: true, force: true });
     } catch (removeErr) {
-      console.log(chalk.yellow("⚠️ having Issues :"), removeErr.message);
+      console.warn(`${colors.yellow}⚠️ Issue while removing dist/: ${removeErr.message}${colors.reset}`);
     }
   });
 
@@ -48,6 +58,6 @@ try {
   archive.directory(distFolder, false);
   await archive.finalize();
 } catch (err) {
-  console.error(chalk.red("\n❌ Build failed:"), err.message);
+  console.error(`${colors.red}\n❌ Build failed: ${err.message}${colors.reset}`);
   process.exit(1);
 }

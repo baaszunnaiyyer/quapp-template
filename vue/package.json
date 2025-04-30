@@ -11,12 +11,11 @@
     "quapp:build": "node build.js"
   },
   "dependencies": {
-    "archiver": "^7.0.1",
-    "qrcode-terminal": "^0.12.0",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.2",
+    "qrcode-terminal": "^0.12.0",
     "vite": "^6.3.1"
   }
 }

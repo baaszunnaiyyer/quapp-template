@@ -6,7 +6,7 @@
     "fallbackPort": false,
     "https": false,
     "openBrowser": true,
-    "autoRetry": true,
+    "autoRetry": false,
     "strictPort": false
   },
   "build": {

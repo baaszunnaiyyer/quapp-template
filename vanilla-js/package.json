@@ -1,14 +1,16 @@
 {
-  "name": "vinilla-js",
+  "name": "vanilla-js",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "quapp server",
     "build": "vite build",
+    "qbuild": "quapp build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "quapp": "^1.0.2",
     "vite": "^6.3.5"
   }
 }

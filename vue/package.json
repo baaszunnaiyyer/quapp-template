@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "quapp serve",
+    "qbuild": "quapp build",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.2",
+    "quapp": "^1.0.2",
     "vite": "^6.3.1"
   }
 }
